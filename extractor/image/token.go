@@ -2,7 +2,7 @@ package image
 
 import (
 	"context"
-
+	"github.com/containers/image/v5/pkg/docker/config"
 	imageTypes "github.com/containers/image/v5/types"
 	"github.com/goodwithtech/deckoder/types"
 )
@@ -25,7 +25,9 @@ func GetToken(ctx context.Context, domain string, opt types.DockerOption) (auth 
 		return &imageTypes.DockerAuthConfig{Username: opt.UserName, Password: opt.Password}
 	}
 
-	var username, password string
+	if config, _ := config.GetCredentials(nil, domain); config.Username != "" {
+		return &config
+	}
 
 	// check registry which particular to get credential
 	for _, registry := range registries {
@@ -33,7 +35,7 @@ func GetToken(ctx context.Context, domain string, opt types.DockerOption) (auth 
 		if err != nil {
 			continue
 		}
-		username, password, err = registry.GetCredential(ctx)
+		username, password, err := registry.GetCredential(ctx)
 		if err != nil {
 			// only skip check registry if error occurred
 			break

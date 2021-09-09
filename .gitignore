@@ -15,6 +15,6 @@ main
 
 vendor
 integration/testdata/fixtures
-cmd/fanal/fanal
+cmd/deckoder/fanal
 *.tar
 *.gz
