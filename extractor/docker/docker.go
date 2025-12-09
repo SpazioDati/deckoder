@@ -54,6 +54,12 @@ func init() {
 func NewDockerExtractor(ctx context.Context, imageName string, option types.DockerOption) (Extractor, func(), error) {
 	ref := image.Reference{Name: imageName, IsFile: false}
 	transports := []string{"docker-daemon:", "docker://"}
+	if option.Platform != "" {
+		// When platform is specified, prioritize registry lookup so the manifest list
+		// can be filtered by OS/arch and fail fast if unsupported, instead of silently
+		// using a pre-existing local image from the daemon.
+		transports = []string{"docker://"}
+	}
 	return newDockerExtractor(ctx, ref, transports, option)
 }
 
