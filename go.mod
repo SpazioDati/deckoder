@@ -1,4 +1,4 @@
-module github.com/goodwithtech/deckoder
+module github.com/SpazioDati/deckoder
 
 go 1.22.7
 

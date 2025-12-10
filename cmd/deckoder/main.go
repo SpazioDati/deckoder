@@ -7,11 +7,11 @@ import (
 	"log"
 	"time"
 
-	"github.com/goodwithtech/deckoder/analyzer"
-	"github.com/goodwithtech/deckoder/extractor"
-	"github.com/goodwithtech/deckoder/extractor/docker"
-	"github.com/goodwithtech/deckoder/types"
-	"github.com/goodwithtech/deckoder/utils"
+	"github.com/SpazioDati/deckoder/analyzer"
+	"github.com/SpazioDati/deckoder/extractor"
+	"github.com/SpazioDati/deckoder/extractor/docker"
+	"github.com/SpazioDati/deckoder/types"
+	"github.com/SpazioDati/deckoder/utils"
 )
 
 func main() {

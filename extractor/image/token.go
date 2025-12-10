@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/containers/image/v5/pkg/docker/config"
 	imageTypes "github.com/containers/image/v5/types"
-	"github.com/goodwithtech/deckoder/types"
+	"github.com/SpazioDati/deckoder/types"
 )
 
 var (

@@ -6,9 +6,9 @@ import (
 	digest "github.com/opencontainers/go-digest"
 	"golang.org/x/xerrors"
 
-	"github.com/goodwithtech/deckoder/extractor"
-	"github.com/goodwithtech/deckoder/extractor/docker"
-	"github.com/goodwithtech/deckoder/types"
+	"github.com/SpazioDati/deckoder/extractor"
+	"github.com/SpazioDati/deckoder/extractor/docker"
+	"github.com/SpazioDati/deckoder/types"
 )
 
 var (

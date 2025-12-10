@@ -8,7 +8,7 @@ import (
 
 	"golang.org/x/xerrors"
 
-	"github.com/goodwithtech/deckoder/types"
+	"github.com/SpazioDati/deckoder/types"
 )
 
 func TestCheckOptions(t *testing.T) {

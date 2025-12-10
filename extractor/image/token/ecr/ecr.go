@@ -5,7 +5,7 @@ import (
 	"encoding/base64"
 	"strings"
 
-	"github.com/goodwithtech/deckoder/types"
+	"github.com/SpazioDati/deckoder/types"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
