@@ -13,13 +13,13 @@ import (
 	digest "github.com/opencontainers/go-digest"
 	"golang.org/x/xerrors"
 
-	"github.com/goodwithtech/deckoder/extractor/image/token/ecr"
-	"github.com/goodwithtech/deckoder/extractor/image/token/gcr"
+	"github.com/SpazioDati/deckoder/extractor/image/token/ecr"
+	"github.com/SpazioDati/deckoder/extractor/image/token/gcr"
 
 	"github.com/knqyf263/nested"
 
-	"github.com/goodwithtech/deckoder/extractor/image"
-	"github.com/goodwithtech/deckoder/types"
+	"github.com/SpazioDati/deckoder/extractor/image"
+	"github.com/SpazioDati/deckoder/types"
 )
 
 const (

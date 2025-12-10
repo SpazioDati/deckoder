@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/goodwithtech/deckoder/types"
+	"github.com/SpazioDati/deckoder/types"
 	"golang.org/x/xerrors"
 
 	"github.com/aws/aws-sdk-go/aws/request"

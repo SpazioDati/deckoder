@@ -11,9 +11,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/goodwithtech/deckoder/extractor/image"
-	"github.com/goodwithtech/deckoder/types"
-	"github.com/goodwithtech/deckoder/utils"
+	"github.com/SpazioDati/deckoder/extractor/image"
+	"github.com/SpazioDati/deckoder/types"
+	"github.com/SpazioDati/deckoder/utils"
 )
 
 const (

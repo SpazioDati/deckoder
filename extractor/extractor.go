@@ -5,7 +5,7 @@ import (
 
 	digest "github.com/opencontainers/go-digest"
 
-	"github.com/goodwithtech/deckoder/types"
+	"github.com/SpazioDati/deckoder/types"
 )
 
 type Extractor interface {

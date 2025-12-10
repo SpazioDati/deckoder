@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/goodwithtech/deckoder/types"
+	"github.com/SpazioDati/deckoder/types"
 
 	"golang.org/x/xerrors"
 
