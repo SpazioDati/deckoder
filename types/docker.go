@@ -7,6 +7,9 @@ type DockerOption struct {
 	UserName string
 	Password string
 
+	// Platform (e.g. linux/amd64, linux/arm64/v8)
+	Platform string
+
 	// ECR
 	AwsAccessKey    string
 	AwsSecretKey    string

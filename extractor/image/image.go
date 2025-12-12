@@ -3,6 +3,7 @@ package image
 import (
 	"context"
 	"io"
+	"strings"
 
 	"github.com/containers/image/v5/image"
 	"github.com/containers/image/v5/pkg/blobinfocache"
@@ -53,6 +54,11 @@ func NewImage(ctx context.Context, image Reference, transports []string, option 
 	var domain string
 	var auth *imageTypes.DockerAuthConfig
 
+	osChoice, archChoice, variantChoice, err := parsePlatform(option.Platform)
+	if err != nil {
+		return RealImage{}, err
+	}
+
 	originalName := image.Name
 	if !image.IsFile {
 		named, err := reference.ParseNormalizedNamed(image.Name)
@@ -70,8 +76,9 @@ func NewImage(ctx context.Context, image Reference, transports []string, option 
 	}
 
 	sys := &imageTypes.SystemContext{
-		// TODO: make OSChoice configurable
-		OSChoice:                          "linux",
+		OSChoice:                          osChoice,
+		ArchitectureChoice:                archChoice,
+		VariantChoice:                     variantChoice,
 		DockerAuthConfig:                  auth,
 		DockerDisableV1Ping:               option.SkipPing,
 		DockerInsecureSkipTLSVerify:       imageTypes.NewOptionalBool(option.InsecureSkipTLSVerify),
@@ -92,6 +99,31 @@ func NewImage(ctx context.Context, image Reference, transports []string, option 
 		rawSource:     rawSource,
 		src:           src,
 	}, nil
+}
+
+func parsePlatform(p string) (osChoice, archChoice, variantChoice string, err error) {
+	osChoice = "linux"
+	if p == "" {
+		return osChoice, "", "", nil
+	}
+	parts := strings.Split(p, "/")
+	switch len(parts) {
+	case 1:
+		archChoice = parts[0]
+	case 2:
+		osChoice = parts[0]
+		archChoice = parts[1]
+	case 3:
+		osChoice = parts[0]
+		archChoice = parts[1]
+		variantChoice = parts[2]
+	default:
+		return "", "", "", xerrors.Errorf("invalid platform %q", p)
+	}
+	if osChoice == "" || archChoice == "" {
+		return "", "", "", xerrors.Errorf("invalid platform %q", p)
+	}
+	return osChoice, archChoice, variantChoice, nil
 }
 
 func newSource(ctx context.Context, imageName string, transports []string, sys *imageTypes.SystemContext) (
