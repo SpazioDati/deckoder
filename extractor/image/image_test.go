@@ -154,6 +154,20 @@ func TestNewImage(t *testing.T) {
 			},
 			wantErr: `failed to initialize: invalid character`,
 		},
+		{
+			name: "sad path: invalid platform variant",
+			args: args{
+				image: Reference{
+					Name:   "testdata/alpine-310.tar.gz",
+					IsFile: true,
+				},
+				transports: []string{"docker-archive:"},
+				option: types.DockerOption{
+					Platform: "linux/amd64/v99",
+				},
+			},
+			wantErr: `requested platform linux/amd64/v99 not available`,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

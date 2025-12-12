@@ -26,6 +26,7 @@ type ImageCloser interface {
 	LayerInfos() (layerInfos []imageTypes.BlobInfo)
 	ConfigInfo() imageTypes.BlobInfo
 	ConfigBlob(context.Context) ([]byte, error)
+	Inspect(context.Context) (*imageTypes.ImageInspectInfo, error)
 	Close() error
 }
 
@@ -91,6 +92,22 @@ func NewImage(ctx context.Context, image Reference, transports []string, option 
 	rawSource, src, err := newSource(ctx, image.Name, transports, sys)
 	if err != nil {
 		return RealImage{}, xerrors.Errorf("failed to initialize source: %w", err)
+	}
+
+	// Validate platform if variant was requested
+	if variantChoice != "" {
+		inspectInfo, err := src.Inspect(ctx)
+		if err != nil {
+			return RealImage{}, xerrors.Errorf("failed to inspect image: %w", err)
+		}
+
+		// Check if the actual platform matches the requested one
+		if inspectInfo.Architecture != archChoice || inspectInfo.Variant != variantChoice {
+			return RealImage{}, xerrors.Errorf(
+				"requested platform %s/%s/%s not available",
+				osChoice, archChoice, variantChoice,
+			)
+		}
 	}
 
 	return RealImage{
